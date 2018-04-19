@@ -1,4 +1,4 @@
-import com.sun.javaws.exceptions.InvalidArgumentException;
+import java.lang.IllegalArgumentException;
 
 /**
  * A Doubly Linked List of type T that has order, does
@@ -10,33 +10,41 @@ public class DoublyLinkedList<T> {
      * A Doubly Linked List Node
      * @param <T> The type of the data
      */
-    private static class Node<T>{
+    private static class Node<T> {
 
-        /**The Next node*/
+        /**
+         * The Next node
+         */
         private Node<T> next;
 
-        /**The Prev node*/
+        /**
+         * The Prev node
+         */
         private Node<T> prev;
 
-        /**The Data*/
+        /**
+         * The Data
+         */
         private T data;
 
 
         /**
          * Constructor for Node
+         *
          * @param data The data of this node
          */
-        private Node(T data){
+        private Node(T data) {
             this(null, null, data);
         }
 
         /**
          * Constructs a node
+         *
          * @param next The next node
          * @param prev The prev node
          * @param data The data of this node
          */
-        private Node(Node<T> next, Node<T> prev, T data){
+        private Node(Node<T> next, Node<T> prev, T data) {
             this.next = next;
             this.prev = prev;
             this.data = data;
@@ -58,6 +66,7 @@ public class DoublyLinkedList<T> {
             this.prev = prev;
         }
     }
+
 
     private Node<T> head;
     private Node<T> tail;
@@ -89,7 +98,18 @@ public class DoublyLinkedList<T> {
      * @param e the element to be added
      */
     public void add(int index, T e){
-
+        if(index == 0){
+            head = new Node(head, null, e);
+            return;
+        }
+        Node<T> current = head.next;
+        for(int i = 1; current == null; i++, current = current.next){
+            if (i == index){
+                Node<T> temp = new Node(current.next, current.prev,e);
+                current.prev.next = temp;
+                current.prev = temp;
+            }
+        }
     }
 
     /**
@@ -120,11 +140,20 @@ public class DoublyLinkedList<T> {
 
     /**
      *
-     * @param index lo
+     * @param index
      * @return
-     * @throws InvalidArgumentException
+     * @throws IllegalArgumentException
      */
-    public T get(int index) throws InvalidArgumentException{
+    public T get(int index) throws IndexOutOfBoundsException{
+        if (head == null || index < 0)
+            throw new IndexOutOfBoundsException("List is empty");
+        Node<T> temp = head;
+        for (int i = 0; temp.next == null; i++, temp = temp.next){
+            if (i == index){
+                return temp.data;
+            }
+        }
+
         return null;
     }
 
