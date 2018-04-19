@@ -8,5 +8,9 @@ public class Hello {
         System.out.println(
                 "Hello?"
         );
+
+        LinkedList<Integer> list = new LinkedList<>();
+
+        list.add(0, new Integer(1));
     }
 }
