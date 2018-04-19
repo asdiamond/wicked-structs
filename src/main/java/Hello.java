@@ -9,8 +9,10 @@ public class Hello {
                 "Hello?"
         );
 
-        LinkedList<Integer> list = new LinkedList<>();
+        DoublyLinkedList<Integer> list = new DoublyLinkedList<>();
 
         list.add(0, new Integer(1));
+
+        list.remove(1);
     }
 }
