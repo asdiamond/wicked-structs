@@ -10,7 +10,7 @@ public class DoublyLinkedList<T> {
      * A Doubly Linked List Node
      * @param <T> The type of the data
      */
-    private static class Node<T> {
+     static class Node<T> {
 
         /**
          * The Next node
@@ -25,7 +25,7 @@ public class DoublyLinkedList<T> {
         /**
          * The Data
          */
-        private T data;
+        public T data;
 
 
         /**
@@ -68,7 +68,7 @@ public class DoublyLinkedList<T> {
     }
 
 
-    private Node<T> head;
+    protected Node<T> head;
     private Node<T> tail;
 
     public DoublyLinkedList(){
@@ -98,8 +98,15 @@ public class DoublyLinkedList<T> {
      * @param e the element to be added
      */
     public void add(int index, T e){
+
         if(index == 0){
-            head = new Node(head, null, e);
+            Node temp = new Node(head,null,e);
+            if (head == null){
+                head = new Node<T>(null,null,e);
+            }
+            head.setPrev(temp);
+            head = temp;
+
             return;
         }
         Node<T> current = head.next;
@@ -171,6 +178,13 @@ public class DoublyLinkedList<T> {
      * @return true if element is found
      */
     public boolean contains(T e){
+        if (head==null) return false;
+        Node<T> temp = head;
+        for (int i = 0; temp.next == null; ){
+                if (temp.data.equals(e)){
+                return true;
+            }
+        }
         return false;
     }
 

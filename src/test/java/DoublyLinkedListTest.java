@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * Created by kevinparker on 4/18/18.
  */
-public class DoublyLinkedListTest {
+public class DoublyLinkedListTest extends DoublyLinkedList{
     DoublyLinkedList<String> list;
 
     @Before
@@ -28,12 +28,25 @@ public class DoublyLinkedListTest {
     }
 
 
-    @Test(expected=IndexOutOfBoundsException.class)
+    @Test/*(expected=IndexOutOfBoundsException.class)*/
     public void getTest(){
-        list.add("Hello");
-        assertEquals(list.get(0), "Hello");
-        list.get(-1);
-        list.get(1000);
+        list.add("hello");
+        list.add("this");
+        list.add("a");
+        list.add("Linked");
+        list.add("list");
+
+        assertEquals(list.get(0),"list");
+
+        assertTrue(list.contains("a"));
+        assertFalse(list.contains("kevin"));
+        assertTrue(list.contains("list"));
+
+
+
+
+        //list.get(-1);
+        //list.get(1000);
 
     }
 
