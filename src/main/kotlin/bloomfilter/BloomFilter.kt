@@ -1,5 +1,7 @@
 package bloomfilter
 
+import java.util.*
+
 /**
  * A Bloom filter is a space-efficient probabilistic data structure,
  * conceived by Burton Howard Bloom in 1970, that is used to test
@@ -9,7 +11,7 @@ package bloomfilter
  * (though this can be addressed with a "counting" filter);
  * the more elements that are added to the set, the larger the probability of false positives.
  */
-class BloomFilter<E : Any?>(var m :Int) : Set<E> {
+class BloomFilter(size: Int, k: Int) {
     /*
       An empty Bloom filter is a bit array of m bits, all set to 0.
       There must also be k different hash functions defined,
@@ -20,25 +22,17 @@ class BloomFilter<E : Any?>(var m :Int) : Set<E> {
       the precise choice of k and the constant of proportionality of m are
       determined by the intended false positive rate of the filter.
      */
-    val internalFilter = ArrayList<Boolean>(m)
-
-    override val size: Int
-        get() = TODO("not implemented") //To change initializer of created properties use File | Settings | File Templates.
-
-    override fun contains(element: E): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    init{
+        val internalFilter = BooleanArray(size)
+        val hashes = Array(k, {Random()})
     }
 
-    override fun containsAll(elements: Collection<E>): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun add(candidate: Any){
+
     }
 
-    override fun isEmpty(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun iterator(): Iterator<E> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    internal fun rand(from: Int, to: Int, random: Random) : Int {
+        return random.nextInt(to - from) + from
     }
 
 }
