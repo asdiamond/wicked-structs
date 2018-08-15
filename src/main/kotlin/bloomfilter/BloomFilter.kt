@@ -11,7 +11,7 @@ import java.util.*
  * (though this can be addressed with a "counting" filter);
  * the more elements that are added to the set, the larger the probability of false positives.
  */
-class BloomFilter(size: Int, k: Int) {
+class BloomFilter(private val size: Int, k: Int) {
     /*
       An empty Bloom filter is a bit array of m bits, all set to 0.
       There must also be k different hash functions defined,
@@ -22,13 +22,26 @@ class BloomFilter(size: Int, k: Int) {
       the precise choice of k and the constant of proportionality of m are
       determined by the intended false positive rate of the filter.
      */
-    init{
-        val internalFilter = BooleanArray(size)
-        val hashes = Array(k, {Random()})
-    }
 
+    val internalFilter = BooleanArray(size)//all begin at false
+    //random number generators as hashes, default constructor seeds with a random number
+    val hashes = Array(k, {Random()})
+
+    /**
+     * To add an element, feed it to each of the k hash functions to get k array positions.
+     * Set all bits (bools) at these positions to 1 (true)
+     */
     fun add(candidate: Any){
 
+    }
+
+    /**
+     * To query for an element feed it to each of the k hash functions to get k array positions.
+     * If any of the bits at these positions is 0, the element is definetly not in the set.
+     * Otherwise, if any bit is 1 (true), the element may be in the set.
+     */
+    fun contains(candidate: Any) : Boolean{
+        return false
     }
 
     internal fun rand(from: Int, to: Int, random: Random) : Int {

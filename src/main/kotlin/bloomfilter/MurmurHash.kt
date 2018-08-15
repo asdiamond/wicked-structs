@@ -1,3 +1,5 @@
+package bloomfilter
+
 import java.nio.ByteBuffer
 import java.util.*
 
@@ -14,6 +16,7 @@ import java.util.*
  * * does not produce same results on little-endian and big endian machines**
  *
  * **if youre deploying this to native.
+ * @author Aleksandr Diamond
  *
  * @param length Length of output hashes, in 4 byte words. 10 by default
  * @param seed Seed of hash function. 0 by default.
@@ -21,8 +24,8 @@ import java.util.*
 class MurmurHash(private val length: Int = 10, private val seed: Int = 0){
     //'m' and 'r' are mixing constants generated offline by austin.
     // not really magicaly, but they work well
-    val m = 0x5bd1e995
-    val r = 24
+    private val m = 0x5bd1e995
+    private val r = 24
 
 
     /**
@@ -56,7 +59,7 @@ class MurmurHash(private val length: Int = 10, private val seed: Int = 0){
 
         //handle last few bytes of input array
         when(len){
-            //seriously? this is the correct way to do a switch?
+        //seriously? this is the correct way to do a switch?
             3 -> {
                 h = h xor (data[2].toInt() shl 16)
                 h = h xor (data[1].toInt() shl 8)
