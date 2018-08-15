@@ -43,9 +43,4 @@ class BloomFilter(private val size: Int, k: Int) {
     fun contains(candidate: Any) : Boolean{
         return false
     }
-
-    internal fun rand(from: Int, to: Int, random: Random) : Int {
-        return random.nextInt(to - from) + from
-    }
-
 }
